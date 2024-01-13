@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/trip/{user_id}', [TripController::class, 'single']);
-Route::post('/trip', [TripController::class, 'store']);
+Route::get('/trip/{user_id}', [TripController::class, 'single'])->name('trip.single');;
+Route::post('/trip', [TripController::class, 'store'])->name('trip.create');
