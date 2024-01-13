@@ -23,6 +23,9 @@ class CalculatePath
     public function handle()
     {
         $travelList = [];
+        if ($this->trips->count() == 0) {
+            return [];
+        }
         foreach ($this->trips as $trip) {
             $travelList[] = [
                 $trip->from, $trip->to
