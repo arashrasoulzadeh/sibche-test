@@ -53,6 +53,6 @@ class CalculatePath
                 }
             }
         }
-        return $trips;
+        return $array;
     }
 }
