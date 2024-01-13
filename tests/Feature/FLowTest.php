@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class FLowTest extends TestCase
 {
-    // use DatabaseTransactions;
+    use DatabaseTransactions;
     /**
      * A basic feature test example.
      */
@@ -41,7 +41,7 @@ class FLowTest extends TestCase
             $response = $this->postJson(route('trip.create'), $data);
         }
         $response->assertStatus(201);
-        $response = $this->getJson(route('trip.single', [$user_id]), $data);
+        $response = $this->getJson(route('trip.single', ['user_id' => $user_id]), $data);
         $response->assertStatus(200);
         $response->assertJson($expectedOutput);
     }

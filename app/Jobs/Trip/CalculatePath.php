@@ -28,9 +28,13 @@ class CalculatePath
                 $trip->from, $trip->to
             ];
         }
+
+        if (count($travelList) <= 1) {
+            return $travelList[0];
+        }
         $travelList = $this->resort($travelList);
-        $src = ($travelList[count($travelList) - 1][0]);
-        $dest = ($travelList[0][1]);
+        $src = $travelList[0][0];
+        $dest = $travelList[count($travelList) - 1][1];
         return [$src, $dest];
     }
 
@@ -40,19 +44,18 @@ class CalculatePath
         array_splice($array, $b, 0, $out);
         return $array;
     }
-    public function resort($trips)
+    public function resort($trips, $index = 0)
     {
+        $current = $trips[$index];
+        $currentSrc = $current[0];
         for ($i = 0; $i < count($trips); $i++) {
-            $src = $trips[$i][0];
-            for ($j = 0; $j < count($trips); $j++) {
-                $dest = $trips[$j][1];
-                if ($i != $j) {
-                    if ($src == $dest) {
-                        $array = $this->moveElement($trips, $j, $i);
-                    }
-                }
+            $pivot = $trips[$i];
+            $pivotDest = $pivot[1];
+            if ($currentSrc == $pivotDest) {
+                $trips = $this->resort($this->moveElement($trips, $i, 0));
             }
         }
-        return $array;
+
+        return $trips;
     }
 }
