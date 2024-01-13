@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sibche test",
+        "description": "trip info",
+        "contact": {
+            "email": "arashrasoulzadeh@gmail.com"
+        },
+        "license": {
+            "name": "Your License",
+            "url": "http://your-license-url.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/trip": {
+            "post": {
+                "summary": "Create a new trip",
+                "operationId": "6a4632b24da82a47cafb6a2eed78bd33",
+                "requestBody": {
+                    "description": "Trip data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "from": {
+                                        "type": "string",
+                                        "example": "TEH"
+                                    },
+                                    "to": {
+                                        "type": "string",
+                                        "example": "RST"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/trip/{userId}": {
+            "get": {
+                "summary": "Fetch trip data",
+                "operationId": "4d13e6e29ad459d9bccc720d4c828278",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of the trip",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        }
+    }
+}
