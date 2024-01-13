@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+    app:
+        build:
+            args:
+                user: sammy
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        container_name: sibche-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+
+    db:
+        image: mysql:8.0
+        container_name: sibche-db
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: sibche
+            MYSQL_ROOT_PASSWORD: sibche
+            MYSQL_PASSWORD: sibche
+            MYSQL_USER: sibche
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./docker/mysql:/docker-entrypoint-initdb.d
+
+    nginx:
+        image: nginx:alpine
+        container_name: sibche-nginx
+        restart: unless-stopped
+        ports:
+            - 8080:80
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx:/etc/nginx/conf.d/
